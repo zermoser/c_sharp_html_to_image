@@ -52,15 +52,6 @@ namespace HtmlToImageAPI.Controllers
 
                 var htmlContent = await System.IO.File.ReadAllTextAsync(templatePath);
 
-                // Replace placeholders ถ้ามี
-                if (model.Replacements != null)
-                {
-                    foreach (var replacement in model.Replacements)
-                    {
-                        htmlContent = htmlContent.Replace($"{{{{{replacement.Key}}}}}", replacement.Value);
-                    }
-                }
-
                 var width = model.Width.GetValueOrDefault(800);
                 var format = string.IsNullOrWhiteSpace(model.Format) ? "png" : model.Format.Trim().ToLowerInvariant();
                 if (format != "png" && format != "jpg" && format != "jpeg") format = "png";
@@ -77,26 +68,5 @@ namespace HtmlToImageAPI.Controllers
             }
         }
 
-        [HttpGet("templates")]
-        public IActionResult GetAvailableTemplates()
-        {
-            try
-            {
-                var templatePath = Path.Combine(_environment.ContentRootPath, "template");
-
-                if (!Directory.Exists(templatePath))
-                    return Ok(new { templates = new string[0] });
-
-                var templates = Directory.GetFiles(templatePath, "*.html")
-                    .Select(f => Path.GetFileNameWithoutExtension(f))
-                    .ToArray();
-
-                return Ok(new { templates });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error retrieving templates: {ex.Message}");
-            }
-        }
     }
 }

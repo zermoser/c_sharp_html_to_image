@@ -36,3 +36,16 @@ curl -X POST "https://localhost:5001/api/convert/html-to-image"   -H "Content-Ty
 ```
 
 > หมายเหตุ: หากรันใน Production ให้พิจารณาปิด Swagger หรือกำหนดเงื่อนไข environment ตามความปลอดภัยของคุณ
+
+
+examplet req
+{
+  "templateName": "test",
+  "width": 1200,
+  "format": "png",
+  "fileName": "my-output",
+  "replacements": {
+    "title": "Hello World",
+    "content": "This is dynamic content"
+  }
+}

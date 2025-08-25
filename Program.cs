@@ -9,8 +9,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "HtmlToImageAPI V1");
+        c.RoutePrefix = string.Empty; // เปิด Swagger UI ที่ root (https://localhost:61216/)
+    });
+}
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
