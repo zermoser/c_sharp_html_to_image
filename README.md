@@ -18,16 +18,16 @@ dotnet run
 ```
 3) เปิด Swagger:
 ```
-https://localhost:5001/swagger
+https://localhost:61216/swagger
 ```
 หรือ:
 ```
-http://localhost:5000/swagger
+http://localhost:61217/swagger
 ```
 
 ### ตัวอย่าง Request (Swagger หรือ curl)
 ```bash
-curl -X POST "https://localhost:5001/api/convert/html-to-image"   -H "Content-Type: application/json"   --data '{
+curl -X POST "https://localhost:61216/api/convert/html-to-image"   -H "Content-Type: application/json"   --data '{
     "htmlContent": "<div style=\"padding:20px;color:blue\">Hello Image</div>",
     "width": 900,
     "format": "png",
